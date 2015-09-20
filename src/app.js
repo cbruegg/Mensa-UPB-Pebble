@@ -16,11 +16,27 @@ function addDays(date, days) {
     return dat;
 }
 
+/**
+ * Number.prototype.format(n, x, s, c)
+ * 
+ * @param integer n: length of decimal
+ * @param integer x: length of whole part
+ * @param mixed   s: sections delimiter
+ * @param mixed   c: decimal delimiter
+ */
+Number.prototype.format = function(n, x, s, c) {
+    var re = '\\d(?=(\\d{' + (x || 3) + '})+' + (n > 0 ? '\\D' : '$') + ')',
+        num = this.toFixed(Math.max(0, ~~n));
+
+    return (c ? num.replace('.', c) : num).replace(new RegExp(re, 'g'), '$&' + (s || ','));
+};
+
 //
 // API
 //
 
-
+var api_id = require('./api_id.js');
+var apiId = api_id.apiId;
 var baseUrl = 'http://www.studentenwerk-pb.de/fileadmin/shareddata/access2.php?id=' + apiId;
 var restaurantUrl = baseUrl + '&getrestaurants=1';
  
@@ -130,6 +146,10 @@ function showPopup(title, body) {
   popup.show();
 }
 
+function formatPrice(priceNumber) {
+  return priceNumber.format(2, 3, '.', ',') + ' €';
+}
+
 function showRestaurantDishes(restaurant, dishes) {
   sortDishesByCategory(dishes);
   var items = dishes.map(function(dish) {
@@ -145,7 +165,7 @@ function showRestaurantDishes(restaurant, dishes) {
   });
   menu.on('select', function(e) {
     var selectedDish = dishes[e.itemIndex];
-    showPopup(selectedDish.category_de, selectedDish.name_de + '\n\n' + selectedDish.date);
+    showPopup(selectedDish.category_de, selectedDish.name_de + '\n\n' + formatPrice(selectedDish.priceStudents) + ', ' + selectedDish.date);
   });
   menu.show();
 }
