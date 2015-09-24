@@ -1,7 +1,7 @@
 {
     "appKeys": {},
     "capabilities": [
-        ""
+        "configurable"
     ],
     "companyName": "c.brueggemann94@gmail.com",
     "longName": "MensaUpb",

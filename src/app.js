@@ -185,6 +185,28 @@ function sortDishesByCategory(dishes) {
   dishes.reverse();
 }
 
+function checkShowFirstTimeInfoModal() {
+  var KEY_FIRST_TIME = "first_time_new4";
+  var isFirstTime = localStorage.getItem(KEY_FIRST_TIME) === null;
+  
+  if (!isFirstTime) {
+    return;
+  } else {
+    localStorage.setItem(KEY_FIRST_TIME, false);
+  }
+  
+  var title = "Notice";
+  var body = "Allergens can be found on the website of the Studentenwerk.";
+  var splashCard = new UI.Card({
+    title: title,
+    body: body
+  });
+  splashCard.on('click', 'select', function(e) {
+    splashCard.hide();
+  });
+  splashCard.show();
+}
+
 /// Main code
 
 // Show splash
@@ -198,6 +220,7 @@ downloadRestaurants(
   restaurantUrl,
   function(restaurants) {
     showRestaurants(restaurants);
+    checkShowFirstTimeInfoModal();
     splashCard.hide();
   }, 
   function(error){
