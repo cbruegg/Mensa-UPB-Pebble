@@ -141,7 +141,8 @@ function loadRestaurant(restaurant) {
 function showPopup(title, body) {
   var popup = new UI.Card({
     title: title,
-    body: body
+    body: body,
+	scrollable: true
   });
   popup.show();
 }
@@ -165,7 +166,9 @@ function showRestaurantDishes(restaurant, dishes) {
   });
   menu.on('select', function(e) {
     var selectedDish = dishes[e.itemIndex];
-    showPopup(selectedDish.category_de, selectedDish.name_de + '\n\n' + formatPrice(selectedDish.priceStudents) + ', ' + selectedDish.date);
+	var pricing = "Students: " + formatPrice(selectedDish.priceStudents) + "\nWorkers: " + formatPrice(selectedDish.priceWorkers) + "\nGuests: " + formatPrice(selectedDish.priceGuests);
+	var dishDescription = selectedDish.name_de  + '\n\n' + pricing + ', \n\n' + selectedDish.date;
+    showPopup(selectedDish.category_de, dishDescription);
   });
   menu.show();
 }

@@ -1,10 +1,10 @@
 {
     "appKeys": {},
     "capabilities": [
-        "configurable"
+        ""
     ],
     "companyName": "c.brueggemann94@gmail.com",
-    "longName": "MensaUpb",
+    "longName": "Mensa UPB",
     "projectType": "pebblejs",
     "resources": {
         "media": [
@@ -32,10 +32,10 @@
         ]
     },
     "sdkVersion": "3",
-    "shortName": "MensaUpb",
+    "shortName": "Mensa UPB",
     "uuid": "2199ad16-67ff-4469-9080-9be7721c3f98",
     "versionCode": 1,
-    "versionLabel": "1.0",
+    "versionLabel": "1.1",
     "watchapp": {
         "hiddenApp": false,
         "watchface": false
